@@ -3,8 +3,10 @@ import {
 	PayloadAction,
 	nanoid,
 	CaseReducer,
+	createAsyncThunk,
 } from "@reduxjs/toolkit";
-import { RootState } from "./store";
+
+import { RootState } from "../../store";
 
 export const COUNT_SLICE_KEY = "count";
 
@@ -34,6 +36,16 @@ export const initialCountState: ICountState = {
 	count: 0,
 	todos: [],
 };
+
+export const fetchTodos = createAsyncThunk(
+	`${COUNT_SLICE_KEY}/fetchTodos`,
+	async (todo: number, thunkAPI) => {
+		console.log(thunkAPI);
+		console.log(todo);
+		// This return value will be payload for extraReducers
+		return todo * 3;
+	}
+);
 
 // Reducer can be defined outside of slice and added in
 const decrementByAmount: TCaseReducer<number> = (state, action) => {
@@ -72,6 +84,24 @@ export const countSlice = createSlice({
 			},
 		},
 	},
+	// In extraReducers action from another slice can be captured
+	// And additional actions can be done
+	// extraReducers can be write in two ways
+	// Builder method and plain method
+	extraReducers: (builder) => {
+		// Here up on updating user in user slice,
+		// count state can be changed
+		builder.addCase(fetchTodos.fulfilled, (state, action) => {
+			console.log(action, state.count);
+			return { ...state, ...{ count: state.count + action.payload } };
+		});
+	},
+	// extraReducers: {
+	// 	[fetchTodos.fulfilled.type]: (state) => {
+	// 		console.log(action);
+	// 		return { ...state, ...{ count: action.payload } };
+	// 	},
+	// },
 });
 
 // Exporting reducer
