@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import {
 	configureStore,
@@ -14,7 +15,6 @@ import createSagaMiddleware from "redux-saga";
 import { createInjectorsEnhancer } from "redux-injectors";
 
 import createReducer from "./rootReducers";
-import { useMemo } from "react";
 
 export function configureAppStore(initialState = {}): EnhancedStore {
 	// Logger configuration
