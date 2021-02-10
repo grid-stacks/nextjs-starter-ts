@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { FC } from "react";
+
 import styles from "../styles/Home.module.css";
+import Button from "@components/Button";
 
 const Home: FC = () => {
 	return (
@@ -12,6 +14,7 @@ const Home: FC = () => {
 
 			<main className={styles.main}>
 				<h1 className={styles.title}>Welcome to Next.js!</h1>
+				<Button>Click me!</Button>
 			</main>
 
 			<footer className={styles.footer}>
