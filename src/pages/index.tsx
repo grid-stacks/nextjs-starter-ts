@@ -15,7 +15,7 @@ const Home: FC = () => {
 			</main>
 
 			<footer className={styles.footer}>
-				Developed by DHN Chandan under{"\t"}
+				Developed by DHN Chandan under{" "}
 				<a
 					href="https://github.com/grid-stacks"
 					target="_blank"
